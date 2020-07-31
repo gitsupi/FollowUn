@@ -79,8 +79,8 @@ public class ForegroundService extends Service {
 
                 try {
                     long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 15 * 1000);
-//                    builder.setContentText(millis/60000+"m time of wait...");
-//                    startForeground(2, builder.build());
+                    builder.setContentText(millis/60000+"m time of wait...");
+                    startForeground(2, builder.build());
                     Thread.sleep(millis);
                     System.out.println("in wait ");
                 } catch (InterruptedException e) {

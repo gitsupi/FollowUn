@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -104,19 +106,40 @@ public class AddFollwerService {
         }
 
 
-
     }
 
     private int sendFollowingRequest(String followerId) throws IOException {
         String uri = "https://www.instagram.com/web/friendships/" + followerId + "/follow/";
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(uri)
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(uri)
+//                .build();
+//
+//        FollowRequestService followRequestService = retrofit.create(FollowRequestService.class);
+//        Call<String> post = followRequestService.post(LoginConfig.cookie, LoginConfig.csrf, "");
+
+        RequestBody reqbody = RequestBody.create(null, new byte[0]);
+        Request.Builder builder = new Request.Builder()
+                .url(uri)
+                .method("POST", reqbody);
+
+        builder.addHeader("Content-type", "application/x-www-form-urlencoded");
+        builder.addHeader("referer", "https://www.instagram.com/p/B7nf91_hkaQ/");
+        builder.addHeader("x-csrftoken", "gjIbkNgCQ7klAZKOpBQTmwZjzHi3IAM5");
+        builder.addHeader("x-ig-app-id", "936619743392459");
+        builder.addHeader("x-ig-www-claim", "hmac.AR1-7bxLsGG2uEzgHR_NTJAwnGLv9FAjwSV6p7X5dy37xEUk");
+        builder.addHeader("x-instagram-ajax", "4c064cca12e4");
+        builder.addHeader("x-requested-with", "XMLHttpRequest");
+        builder.addHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
+        builder.addHeader("cookie", LoginConfig.cookie);
+
+        Request request = builder
                 .build();
+        final OkHttpClient client = new OkHttpClient();
 
-        FollowRequestService followRequestService = retrofit.create(FollowRequestService.class);
-        Call<String> post = followRequestService.post(LoginConfig.cookie, LoginConfig.csrf, "");
-
+        okhttp3.Response re = client.newCall(request).execute();
+//        System.out.println(re.body().string());
+        return re.code();
 
 //        httpPost.setEntity(null);
 //        httpPost.setHeader("Content-type", "application/x-www-form-urlencoded");
@@ -127,7 +150,6 @@ public class AddFollwerService {
 //        httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
 //        httpPost.setHeader("x-requested-with", "XMLHttpRequest");
 
-        return post.execute().code();
     }
 
 
