@@ -11,9 +11,13 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
+import com.example.amin.followfuck.instgram.AddFollwerService;
+import com.example.amin.followfuck.instgram.ResponseAction;
+
+import org.json.JSONArray;
+
 public class ForegroundService extends Service {
     public static final String CHANNEL_ID = "ForegroundServiceChannel";
-
 
 
     @Override
@@ -37,10 +41,48 @@ public class ForegroundService extends Service {
 
         new Thread(() -> {
             for (int i = 0; true; i++) {
-                builder.setContentText("got" + i);
-                startForeground(2, builder.build());
+
+
+                AddFollwerService addFollwerService = new AddFollwerService();
+                String celebrityId = addFollwerService.selectRandomCelebrityId(fullname -> {
+                    builder.setContentText(fullname + " selected");
+                    startForeground(2, builder.build());
+                });
                 try {
-                    Thread.sleep(1000);
+                    JSONArray firstsfollowers = addFollwerService.findFirstsfollowers(celebrityId);
+                    addFollwerService.startfollowFollowers(firstsfollowers, new ResponseAction() {
+                        @Override
+                        public void applyBeforeSendFollowRequest(String instaUsername) {
+                            builder.setContentText(instaUsername + " is requesting...");
+                            startForeground(2, builder.build());
+                        }
+
+                        @Override
+                        public void applyAfterFollowSucces(String instaUsername) {
+                            builder.setContentText(instaUsername + " followed succfully 😍");
+                            startForeground(2, builder.build());
+                        }
+
+                        @Override
+                        public void applyAfterFollowError(String instaUsername, int errorcode) {
+                            builder.setContentText(instaUsername + " failed 😢");
+                            startForeground(2, builder.build());
+                        }
+                    });
+
+                } catch (Exception e) {
+                    builder.setContentText(e.toString());
+                    startForeground(2, builder.build());
+
+                }
+
+
+                try {
+                    long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 15 * 1000);
+//                    builder.setContentText(millis/60000+"m time of wait...");
+//                    startForeground(2, builder.build());
+                    Thread.sleep(millis);
+                    System.out.println("in wait ");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
