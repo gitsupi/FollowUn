@@ -1,5 +1,7 @@
 package com.example.amin.followfuck.instgram;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,17 +34,18 @@ public class AddFollwerService {
 //            String full_name = (String) node.get("full_name");
 //          InstaUser instaUser = new InstaUser(followingid, username, full_name, is_private);
             int resonsecode = sendFollowingRequest(followingid);
-            if (resonsecode == 200) {
+            if (resonsecode == StatusCodes.OK) {
                 responseAction.applyAfterFollowSucces(username);
-            } else
+            } else if (resonsecode == StatusCodes.TOMONAYREQUEST) {
                 responseAction.applyAfterFollowError(username, resonsecode);
+            }
         }
 
     }
 
     public String selectRandomCelebrityId(ShowTitleNotification showTitleNotification) {
 
-        String[] ids = {"1296464116", "305851563"};
+        String[] ids = {"1296464116", "305851563","373148161"};
         String idofInbfluencer = ids[(int) (Math.random() * 1000000) % 2];
         try {
             String s = UsernameFinder.find(idofInbfluencer);
@@ -125,10 +128,10 @@ public class AddFollwerService {
 
         builder.addHeader("Content-type", "application/x-www-form-urlencoded");
         builder.addHeader("referer", "https://www.instagram.com/p/B7nf91_hkaQ/");
-        builder.addHeader("x-csrftoken", "gjIbkNgCQ7klAZKOpBQTmwZjzHi3IAM5");
-        builder.addHeader("x-ig-app-id", "936619743392459");
-        builder.addHeader("x-ig-www-claim", "hmac.AR1-7bxLsGG2uEzgHR_NTJAwnGLv9FAjwSV6p7X5dy37xEUk");
-        builder.addHeader("x-instagram-ajax", "4c064cca12e4");
+        builder.addHeader("x-csrftoken", LoginConfig.csrf);
+        builder.addHeader("x-ig-app-id", LoginConfig.XIG_APP_ID);
+        builder.addHeader("x-ig-www-claim", LoginConfig.X_IG_WWW_CLAIM);
+        builder.addHeader("x-instagram-ajax", LoginConfig.X_INSTAGRAM_AJAX);
         builder.addHeader("x-requested-with", "XMLHttpRequest");
         builder.addHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
         builder.addHeader("cookie", LoginConfig.cookie);
@@ -138,7 +141,7 @@ public class AddFollwerService {
         final OkHttpClient client = new OkHttpClient();
 
         okhttp3.Response re = client.newCall(request).execute();
-//        System.out.println(re.body().string());
+        System.out.println(re.body().string());
         return re.code();
 
 //        httpPost.setEntity(null);

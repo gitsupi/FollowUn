@@ -5,7 +5,10 @@ package com.example.amin.followfuck.instgram;
  */
 
 public class LoginConfig {
-    public final static String cookie = "ig_cb=1; mid=XKH3nQALAAHhnv9Y7d2jG33GUBXa; ig_did=B4A9D94B-4507-4326-BDA7-6FAF7D9398D0; datr=fZAjXhUwOXatDeFYjwO3kBAj; shbid=9033; csrftoken=gjIbkNgCQ7klAZKOpBQTmwZjzHi3IAM5; ds_user_id=30299824247; sessionid=30299824247%3AZm6CiDhNYe8wco%3A8; shbts=1596127512.6155002; rur=ASH; urlgen=\"{\\\"5.236.145.154\\\": 58224\\054 \\\"5.239.198.220\\\": 58224\\054 \\\"37.235.48.166\\\": 51290\\054 \\\"2.182.208.43\\\": 58224}:1k1NvZ:vFoWvNrxD88iOWThfI6HJhb2jx0\"";
+    public final static String cookie = "ig_did=E3DBBCB8-A468-40BC-920A-A9EC445D8710; mid=XqXF2gALAAE2ZeIZ2Nx4Q5DKTjy5; shbid=17100; shbts=1596125557.4907215; ig_direct_region_hint=FRC; rur=ASH; csrftoken=8ZMcmXkg75HwURWSsEMxaDK5zBRqiQ5n; ds_user_id=38081432117; sessionid=38081432117%3AFTMnTanLgiHvwI%3A25; urlgen=\"{\\\"5.239.194.37\\\": 58224}:1k1rod:kYKAOGP_X0LQgFvCmHWXvdc4XDk\"";
 
-    public static String csrf="gjIbkNgCQ7klAZKOpBQTmwZjzHi3IAM5";
+    public static String csrf = "8ZMcmXkg75HwURWSsEMxaDK5zBRqiQ5n";
+    public static String X_INSTAGRAM_AJAX = "81a581bb9399";
+    public static String X_IG_WWW_CLAIM = "hmac.AR2cugIZgXDMS7OrwO9szfy3SNejWHppB1sM8E8aoTPOrGFo";
+    public static String XIG_APP_ID = "936619743392459";
 }

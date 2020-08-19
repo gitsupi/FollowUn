@@ -1,20 +1,23 @@
 package com.example.amin.followfuck;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
 import com.example.amin.followfuck.instgram.AddFollwerService;
+import com.example.amin.followfuck.instgram.Reqs;
 import com.example.amin.followfuck.instgram.ResponseAction;
+import com.example.amin.followfuck.instgram.StatusCodes;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class ForegroundService extends Service {
     public static final String CHANNEL_ID = "ForegroundServiceChannel";
@@ -28,16 +31,16 @@ public class ForegroundService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String input = intent.getStringExtra("inputExtra");
-        createNotificationChannel();
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Foreground Service")
+                .setContentTitle("start following")
                 .setContentText(input)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setOnlyAlertOnce(true)
-                .setContentIntent(pendingIntent);
+//                .setContentIntent(pendingIntent)
+                ;
 
         new Thread(() -> {
             for (int i = 0; true; i++) {
@@ -45,7 +48,10 @@ public class ForegroundService extends Service {
 
                 AddFollwerService addFollwerService = new AddFollwerService();
                 String celebrityId = addFollwerService.selectRandomCelebrityId(fullname -> {
-                    builder.setContentText(fullname + " selected");
+
+
+                    builder.setContentTitle(fullname + " followers")
+                            .setContentText(fullname + " selected");
                     startForeground(2, builder.build());
                 });
                 try {
@@ -65,7 +71,9 @@ public class ForegroundService extends Service {
 
                         @Override
                         public void applyAfterFollowError(String instaUsername, int errorcode) {
-                            builder.setContentText(instaUsername + " failed 😢");
+                            if (errorcode== StatusCodes.TOMONAYREQUEST)
+                            builder.setContentTitle("too many requests error ..." )
+                                    .setContentText(instaUsername + " failed 😢");
                             startForeground(2, builder.build());
                         }
                     });
@@ -77,14 +85,32 @@ public class ForegroundService extends Service {
                 }
 
 
+                long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 15 * 1000);
                 try {
-                    long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 15 * 1000);
-                    builder.setContentText(millis/60000+"m time of wait...");
-                    startForeground(2, builder.build());
-                    Thread.sleep(millis);
-                    System.out.println("in wait ");
-                } catch (InterruptedException e) {
+                    String resp = Reqs.getReq("https://www.instagram.com/paksilen_market/?__a=1");
+                    JSONObject jsonObject = new JSONObject(resp);
+                    JSONObject user = (JSONObject) ((JSONObject) jsonObject.get("graphql")).get("user");
+                    Integer countedge_follow = ((Integer) ((JSONObject) user.get("edge_follow")).get("count"));
+                    Integer edge_followed_by = ((Integer) ((JSONObject) user.get("edge_followed_by")).get("count"));
+                    builder.setContentTitle(edge_followed_by + "\\" + countedge_follow);
+
+
+                } catch (IOException e) {
+
+                } catch (JSONException e) {
                     e.printStackTrace();
+                }
+
+                int k=0;
+                while (k<10) {
+                    try {
+                        builder.setContentText(millis *k/ 600000 + "m time of wait.passed..");
+                        startForeground(2, builder.build());
+                        Thread.sleep(millis/10);
+                        k++;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }).start();
@@ -102,18 +128,5 @@ public class ForegroundService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }
-
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel serviceChannel = new NotificationChannel(
-                    CHANNEL_ID,
-                    "Foreground Service Channel",
-                    NotificationManager.IMPORTANCE_DEFAULT
-            );
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(serviceChannel);
-        }
-
     }
 }

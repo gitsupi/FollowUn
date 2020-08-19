@@ -1,8 +1,11 @@
 package com.example.amin.followfuck.instgram;
 
 
+import org.json.JSONObject;
+
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -20,6 +23,6 @@ public interface FindFollowingService {
             "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36"
     })
     @GET("graphql/query/")
-    Call<String> get(@Header("cookie") String cookie,
-                     @QueryMap Map<String, String> options);
+    Call<ResponseBody> get(@Header("cookie") String cookie,
+                           @QueryMap Map<String, String> options);
 }
