@@ -45,8 +45,11 @@ public class AddFollwerService {
 
     public String selectRandomCelebrityId(ShowTitleNotification showTitleNotification) {
 
-        String[] ids = {"1296464116", "305851563","373148161"};
-        String idofInbfluencer = ids[(int) (Math.random() * 1000000) % 2];
+        String[] ids = {"1296464116", "305851563", "373148161", "241999282", "1705191588", "438501706", "639139147"
+                , "1791861245", "994174586", "360507308", "1929875881", "540559218", "461064840", "145715496"
+                , "682153522","28025883"};
+
+        String idofInbfluencer = ids[(int) (Math.random() * 1000000) % ids.length];
         try {
             String s = UsernameFinder.find(idofInbfluencer);
             showTitleNotification.apply(s);
@@ -66,7 +69,7 @@ public class AddFollwerService {
 //        id = "6875751076";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
 //        id = "305851563";// username: reza golzar
         //TODO NEED TO BE AUTHENTICATED WITH COOCKIES
-        int number = 16;
+        int number = 14;
         String par = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":true,\"first\":%d}", idofInbfluencer, number);
         String ev = URLEncoder.encode(par);//first 1 i see
 
