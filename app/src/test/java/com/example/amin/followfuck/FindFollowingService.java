@@ -1,4 +1,4 @@
-package com.example.amin.followfuck.instgram;
+package com.example.amin.followfuck;
 
 
 import org.json.JSONObject;
@@ -25,4 +25,7 @@ public interface FindFollowingService {
     @GET("graphql/query/")
     Call<ResponseBody> get(@Header("cookie") String cookie,
                            @QueryMap Map<String, String> options);
+
+
+
 }

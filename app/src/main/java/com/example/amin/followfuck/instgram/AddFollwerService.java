@@ -1,22 +1,15 @@
 package com.example.amin.followfuck.instgram;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.HashMap;
 
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class AddFollwerService {
 
@@ -29,16 +22,10 @@ public class AddFollwerService {
             String followingid = (String) node.get("id");
 
             String username = (String) node.get("username");
-            responseAction.applyBeforeSendFollowRequest(username);
-//            boolean is_private = (boolean) node.get("is_private");
-//            String full_name = (String) node.get("full_name");
-//          InstaUser instaUser = new InstaUser(followingid, username, full_name, is_private);
+            responseAction.applyBeforeSendRequest(username);
             int resonsecode = sendFollowingRequest(followingid);
-            if (resonsecode == StatusCodes.OK) {
-                responseAction.applyAfterFollowSucces(username);
-            } else if (resonsecode == StatusCodes.TOMONAYREQUEST) {
-                responseAction.applyAfterFollowError(username, resonsecode);
-            }
+            if (resonsecode == StatusCodes.OK) responseAction.applyAfterSucces(username);
+            else responseAction.applyAfterFollowError(username, resonsecode);
         }
 
     }
@@ -47,7 +34,7 @@ public class AddFollwerService {
 
         String[] ids = {"1296464116", "305851563", "373148161", "241999282", "1705191588", "438501706", "639139147"
                 , "1791861245", "994174586", "360507308", "1929875881", "540559218", "461064840", "145715496"
-                , "682153522","28025883"};
+                , "682153522", "28025883"};
 
         String idofInbfluencer = ids[(int) (Math.random() * 1000000) % ids.length];
         try {
@@ -55,22 +42,22 @@ public class AddFollwerService {
             showTitleNotification.apply(s);
 
         } catch (IOException e) {
-            showTitleNotification.apply("errorname");
+            showTitleNotification.apply(e.getMessage());
         } catch (JSONException e) {
-            showTitleNotification.apply("errorname");
+            showTitleNotification.apply(e.getLocalizedMessage());
         }
         return idofInbfluencer;
     }
 
 
-    public JSONArray findFirstsfollowers(String idofInbfluencer) throws Exception {
+    public JSONArray findFirstsfollowers(String idofInfluencer) throws Exception {
 
 //        String id = "8916622827";// last post
 //        id = "6875751076";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
 //        id = "305851563";// username: reza golzar
         //TODO NEED TO BE AUTHENTICATED WITH COOCKIES
         int number = 14;
-        String par = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":true,\"first\":%d}", idofInbfluencer, number);
+        String par = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":true,\"first\":%d}", idofInfluencer, number);
         String ev = URLEncoder.encode(par);//first 1 i see
 
         String url = "https://www.instagram.com/graphql/query/?query_hash=c76146de99bb02f6415203be841dd25a&variables=" + ev;

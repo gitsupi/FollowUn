@@ -1,6 +1,5 @@
 package com.example.amin.followfuck;
 
-import com.example.amin.followfuck.instgram.FindFollowingService;
 import com.example.amin.followfuck.instgram.LoginConfig;
 import com.example.amin.followfuck.instgram.UsernameFinder;
 
@@ -16,8 +15,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-
-import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -42,8 +39,10 @@ public class ExampleUnitTest {
 //        id = "305851563";// username: reza golzar
         //TODO NEED TO BE AUTHENTICATED WITH COOCKIES
         int number = 16;
-        String par = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":true,\"first\":%d}", id, number);
+        String par = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":true,\"first\":}", id, number);
         String ev = URLEncoder.encode(par);//first 1 i see
+        String par2 = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":false,\"first\":24}", id);
+        String ev2 = URLEncoder.encode(par2);//first 1 i see
 
         String url = "https://www.instagram.com/graphql/query/?query_hash=c76146de99bb02f6415203be841dd25a&variables=" + ev;
         System.out.println(url);

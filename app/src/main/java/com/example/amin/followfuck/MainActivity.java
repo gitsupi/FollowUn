@@ -9,8 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private NotificationManager mNotificationManager;
     public void startService() {
-        Intent serviceIntent = new Intent(this, ForegroundService.class);
-        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
+        Intent serviceIntent = new Intent(this, UnFollowForegroundService.class);
+//        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
         ContextCompat.startForegroundService(this, serviceIntent);
     }
     @Override
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //         startService(new Intent(this, HelloService.class));
         startService();
+
 //
 //        String posted_by = "111-333-222-4";
 //

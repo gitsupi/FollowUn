@@ -11,7 +11,6 @@ import com.example.amin.followfuck.instgram.AddFollwerService;
 import com.example.amin.followfuck.instgram.Reqs;
 import com.example.amin.followfuck.instgram.ResponseAction;
 import com.example.amin.followfuck.instgram.StatusCodes;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +18,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class ForegroundService extends Service {
+public class FollowForegroundService extends Service {
     public static final String CHANNEL_ID = "ForegroundServiceChannel";
 
 
@@ -58,13 +57,13 @@ public class ForegroundService extends Service {
                     JSONArray firstsfollowers = addFollwerService.findFirstsfollowers(celebrityId);
                     addFollwerService.startfollowFollowers(firstsfollowers, new ResponseAction() {
                         @Override
-                        public void applyBeforeSendFollowRequest(String instaUsername) {
-                            builder.setContentText(instaUsername + " is requesting...");
+                        public void applyBeforeSendRequest(Object instaUsername) {
+                            builder.setContentText(((String) instaUsername) + " is requesting...");
                             startForeground(2, builder.build());
                         }
 
                         @Override
-                        public void applyAfterFollowSucces(String instaUsername) {
+                        public void applyAfterSucces(String instaUsername) {
                             builder.setContentText(instaUsername + " followed succfully 😍");
                             startForeground(2, builder.build());
                         }
