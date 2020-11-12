@@ -118,10 +118,10 @@ public class AddFollwerService {
 
         builder.addHeader("Content-type", "application/x-www-form-urlencoded");
         builder.addHeader("referer", "https://www.instagram.com/p/B7nf91_hkaQ/");
-        builder.addHeader("x-csrftoken", LoginConfig.csrf);
+        builder.addHeader("x-csrftoken", LoginConfig.csrftoken);
         builder.addHeader("x-ig-app-id", LoginConfig.XIG_APP_ID);
         builder.addHeader("x-ig-www-claim", LoginConfig.X_IG_WWW_CLAIM);
-        builder.addHeader("x-instagram-ajax", LoginConfig.X_INSTAGRAM_AJAX);
+//        builder.addHeader("x-instagram-ajax", LoginConfig.X_INSTAGRAM_AJAX);
         builder.addHeader("x-requested-with", "XMLHttpRequest");
         builder.addHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
         builder.addHeader("cookie", LoginConfig.cookie);

@@ -51,7 +51,7 @@ public class FollowForegroundService extends Service {
 
                     builder.setContentTitle(fullname + " followers")
                             .setContentText(fullname + " selected");
-                    startForeground(2, builder.build());
+                    startForeground(3, builder.build());
                 });
                 try {
                     JSONArray firstsfollowers = addFollwerService.findFirstsfollowers(celebrityId);
@@ -59,13 +59,13 @@ public class FollowForegroundService extends Service {
                         @Override
                         public void applyBeforeSendRequest(Object instaUsername) {
                             builder.setContentText(((String) instaUsername) + " is requesting...");
-                            startForeground(2, builder.build());
+                            startForeground(3, builder.build());
                         }
 
                         @Override
                         public void applyAfterSucces(String instaUsername) {
                             builder.setContentText(instaUsername + " followed succfully 😍");
-                            startForeground(2, builder.build());
+                            startForeground(3, builder.build());
                         }
 
                         @Override
@@ -73,13 +73,13 @@ public class FollowForegroundService extends Service {
                             if (errorcode== StatusCodes.TOMONAYREQUEST)
                             builder.setContentTitle("too many requests error ..." )
                                     .setContentText(instaUsername + " failed 😢");
-                            startForeground(2, builder.build());
+                            startForeground(3, builder.build());
                         }
                     });
 
                 } catch (Exception e) {
                     builder.setContentText(e.toString());
-                    startForeground(2, builder.build());
+                    startForeground(3, builder.build());
 
                 }
 
@@ -104,7 +104,7 @@ public class FollowForegroundService extends Service {
                 while (k<10) {
                     try {
                         builder.setContentText(millis *k/ 600000 + "m time of wait.passed..");
-                        startForeground(2, builder.build());
+                        startForeground(3, builder.build());
                         Thread.sleep(millis/10);
                         k++;
                     } catch (InterruptedException e) {

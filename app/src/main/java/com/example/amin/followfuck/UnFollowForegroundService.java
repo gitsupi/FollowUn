@@ -13,7 +13,6 @@ import com.example.amin.followfuck.instgram.StatusCodes;
 import com.example.amin.followfuck.instgram.UnfollowMyFollowingsService;
 import com.example.amin.followfuck.instgram.models.Followings;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,14 +34,19 @@ public class UnFollowForegroundService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("start following")
+                .setContentTitle("start unfollowing")
                 .setContentText(input)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setOnlyAlertOnce(true)
 //                .setContentIntent(pendingIntent)
                 ;
+        System.out.println("gooogle");
+        startForeground(2, builder.build());
+
 
         new Thread(() -> {
+            System.out.println("gooogle2");
+
 
             UnfollowMyFollowingsService unfollowMyFollowingsService = new UnfollowMyFollowingsService();
             Followings firstsfollowings = null;
@@ -50,49 +54,29 @@ public class UnFollowForegroundService extends Service {
 
                 firstsfollowings = unfollowMyFollowingsService.findFirstsfollowings();
 
-                unfollowMyFollowingsService.startUnfollowMyfollowing(firstsfollowings.postedges, new ResponseAction() {
-                    @Override
-                    public void applyBeforeSendRequest(Object instaUsername) {
-                        builder.setContentText(instaUsername + " is requesting to be unfollowed...");
-                        startForeground(2, builder.build());
-                    }
-
-                    @Override
-                    public void applyAfterSucces(String instaUsername) {
-                        builder.setContentText(instaUsername + "unfollowed succfully 😍");
-                        startForeground(2, builder.build());
-                    }
-
-                    @Override
-                    public void applyAfterFollowError(String instaUsername, int errorcode) {
-                        if (errorcode == StatusCodes.TOMONAYREQUEST)
-                            builder.setContentTitle("too many requests error ...")
-                                    .setContentText(instaUsername + " failed 😢 to unfollow");
-                        else
-                            builder.setContentTitle(errorcode + " recieved")
-                                    .setContentText(instaUsername + " failed 😢 to unfollow");
-
-                        startForeground(2, builder.build());
-                    }
-                });
-
+                builder.setContentText("first followers ");
+                startForeground(2, builder.build());
             } catch (Exception e) {
                 builder.setContentText(e.toString());
                 startForeground(2, builder.build());
-
             }
 
 
             String end_cursor = firstsfollowings.end_cursor;
             boolean has_next_page = firstsfollowings.has_next_page;
-            wait(builder);
+//            wait(builder);
+            int delay = 0;
             while (has_next_page) {
                 try {
 
                     Followings aftersfollowings = unfollowMyFollowingsService.findAftersfollowings(end_cursor);
                     has_next_page = aftersfollowings.has_next_page;
                     end_cursor = aftersfollowings.end_cursor;
-
+                    if (delay++ < 10) {
+                        builder.setContentText("delaying ");
+                        startForeground(2, builder.build());
+                        continue;
+                    }
 
                     unfollowMyFollowingsService.startUnfollowMyfollowing(aftersfollowings.postedges, new ResponseAction() {
                         @Override

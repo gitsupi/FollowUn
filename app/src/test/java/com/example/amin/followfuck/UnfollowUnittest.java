@@ -24,12 +24,14 @@ import retrofit2.Retrofit;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest2 {
+public class UnfollowUnittest {
     @Test
     public void addition_isCorrect() {
 
         String id = "8916622827";// last post
         id = "38081432117";
+        id = "30299824247";
+        id = "30134076076";//DAYIPET
 
 
         String par2 = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":false,\"first\":12}", id);
@@ -78,8 +80,13 @@ public class ExampleUnitTest2 {
                 System.out.println(node.get("username"));
                 String followingid = (String) node.get("id");
                 Response<ResponseBody> bodyResponse = unFollowingRequests.unfollow(LoginConfig.cookie, followingid).execute();
+
+                System.out.println(bodyResponse.code());
+
                 String status = Objects.requireNonNull(bodyResponse.body()).string();
+
                 System.out.println(status);
+
                 Thread.sleep(1000);
             }
 
