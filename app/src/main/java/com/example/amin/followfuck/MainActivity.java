@@ -23,19 +23,13 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        BusinessContext.initsetup();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//         startService(new Intent(this, HelloService.class));
         startService();
         startunfoloowService();
 
     }
 
-
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }

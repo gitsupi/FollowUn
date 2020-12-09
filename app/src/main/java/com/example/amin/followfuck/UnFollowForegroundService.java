@@ -45,7 +45,6 @@ public class UnFollowForegroundService extends Service {
 
 
         new Thread(() -> {
-            System.out.println("gooogle2");
 
 
             UnfollowMyFollowingsService unfollowMyFollowingsService = new UnfollowMyFollowingsService();
@@ -59,6 +58,7 @@ public class UnFollowForegroundService extends Service {
             } catch (Exception e) {
                 builder.setContentText(e.toString());
                 startForeground(2, builder.build());
+                return;
             }
 
 
@@ -72,7 +72,7 @@ public class UnFollowForegroundService extends Service {
                     Followings aftersfollowings = unfollowMyFollowingsService.findAftersfollowings(end_cursor);
                     has_next_page = aftersfollowings.has_next_page;
                     end_cursor = aftersfollowings.end_cursor;
-                    if (delay++ < 10) {
+                    if (delay++ < 100) {
                         builder.setContentText("delaying ");
                         startForeground(2, builder.build());
                         continue;
@@ -126,12 +126,12 @@ public class UnFollowForegroundService extends Service {
     private void wait(NotificationCompat.Builder builder) {
         long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 15 * 1000);
         try {
-            String resp = Reqs.getReq("https://www.instagram.com/paksilen_market/?__a=1");
+            String resp = Reqs.getReq("https://www.instagram.com/" + BusinessContext.Username + "/?__a=1");
             JSONObject jsonObject = new JSONObject(resp);
             JSONObject user = (JSONObject) ((JSONObject) jsonObject.get("graphql")).get("user");
             Integer countedge_follow = ((Integer) ((JSONObject) user.get("edge_follow")).get("count"));
             Integer edge_followed_by = ((Integer) ((JSONObject) user.get("edge_followed_by")).get("count"));
-            builder.setContentTitle(edge_followed_by + "\\" + countedge_follow);
+            builder.setContentTitle(BusinessContext.Username+" "+edge_followed_by + "/" + countedge_follow);
         } catch (IOException e) {
 
         } catch (JSONException e) {
