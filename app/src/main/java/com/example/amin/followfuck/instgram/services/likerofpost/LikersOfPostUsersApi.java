@@ -12,7 +12,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.QueryMap;
 
-public interface LikersOfPostUsersReq {
+public interface LikersOfPostUsersApi {
 
     @Headers({
             "x-requested-with: XMLHttpRequest",
@@ -23,4 +23,6 @@ public interface LikersOfPostUsersReq {
     @GET("graphql/query/")
     Call<ResponseBody> getLastFollowings(@Header("cookie") String cookie,
                                          @QueryMap Map<String, String> options);
+
+
 }

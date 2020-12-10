@@ -47,9 +47,9 @@ public class FollowLikersForegroundService extends Service {
             for (int i = 0; true; i++) {
 
                 String shortcode = "";
-                UsersofLikedService addFollwerService = new UsersofLikedService();
+                UsersofLikedService usersofLikedService = new UsersofLikedService();
                 try {
-                    shortcode = addFollwerService.lastpostShortcode(fullname -> {
+                    shortcode = usersofLikedService.lastpostShortcode(fullname -> {
 
                         builder.setContentTitle(fullname + " followers")
                                 .setContentText(fullname + " selected");
@@ -64,8 +64,8 @@ public class FollowLikersForegroundService extends Service {
                     continue;
 
                 try {
-                    JSONArray firstsfollowers = addFollwerService.find(shortcode);
-                    addFollwerService.startfollowFollowers(firstsfollowers, new ResponseAction() {
+                    JSONArray firstsfollowers = usersofLikedService.find(shortcode);
+                    usersofLikedService.startfollowFollowers(firstsfollowers, new ResponseAction() {
                         @Override
                         public void applyBeforeSendRequest(Object instaUsername) {
                             builder.setContentText(((String) instaUsername) + " is requesting...");

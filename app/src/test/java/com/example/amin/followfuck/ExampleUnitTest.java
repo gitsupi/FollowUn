@@ -1,7 +1,7 @@
 package com.example.amin.followfuck;
 
 import com.example.amin.followfuck.instgram.LoginConfig;
-import com.example.amin.followfuck.instgram.UsernameFinder;
+import com.example.amin.followfuck.instgram.services.hashtag.HashTagApi;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -70,6 +71,31 @@ public class ExampleUnitTest {
             e.printStackTrace();
         }
 //
+
+
+    }
+
+
+
+    @Test
+    public void dd()
+    {
+        String url = "https://www.instagram.com/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .build();
+
+        HashTagApi hashTagApi = retrofit.create(HashTagApi.class);
+
+        Call<ResponseBody> call = hashTagApi.gethashtagdata(LoginConfig.cookie,"manto");
+
+        try {
+            Response<ResponseBody> execute = call.execute();
+            System.out.println(execute.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }

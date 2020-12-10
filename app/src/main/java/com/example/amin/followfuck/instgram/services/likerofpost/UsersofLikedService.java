@@ -55,7 +55,12 @@ public class UsersofLikedService {
         String resp = Reqs.getReq("https://www.instagram.com/" + usr + "/?__a=1");
         JSONObject jsonObject = new JSONObject(resp);
         JSONObject user = (JSONObject) ((JSONObject) jsonObject.get("graphql")).get("user");
-        String shortcode = ((String) ((JSONObject) user.get("shortcode")).get("count"));
+
+        String s = ((JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) user.get("edge_owner_to_timeline_media")).get("edges")).get(0))
+                .get("node")).get("shortcode").toString();
+
+        String shortcode =s;
+        System.out.println("short code "+shortcode);
         return shortcode;
     }
 
@@ -120,10 +125,10 @@ public class UsersofLikedService {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .build();
-        LikersOfPostUsersReq likersOfPostUsersReq = retrofit.create(LikersOfPostUsersReq.class);
+        LikersOfPostUsersApi likersOfPostUsersApi = retrofit.create(LikersOfPostUsersApi.class);
         objectObjectHashMap.put("query_hash", "d5d763b1e2acf209d62d22d184488e57");
         objectObjectHashMap.put("variables", par2);
-        Call<ResponseBody> call = likersOfPostUsersReq.getLastFollowings(LoginConfig.cookie, objectObjectHashMap);
+        Call<ResponseBody> call = likersOfPostUsersApi.getLastFollowings(LoginConfig.cookie, objectObjectHashMap);
 
         Response<ResponseBody> execute;
         try {
@@ -133,20 +138,18 @@ public class UsersofLikedService {
 
             JSONObject jsonObject = new JSONObject(string);
 
-            JSONArray postedges = (JSONArray) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject
+            JSONObject edgelikedby = (JSONObject) ((JSONObject) ((JSONObject) jsonObject
                     .get("data"))
                     .get("shortcode_media"))
-                    .get("edge_liked_by"))
+                    .get("edge_liked_by");
+
+            JSONArray postedges = (JSONArray) edgelikedby
                     .get("edges");
 
+            JSONObject page_info = (JSONObject) edgelikedby.get("page_info");
+            String end_curser = page_info.get("end_cursor").toString();
+            boolean has_next_page = ((boolean) page_info.get("has_next_page"));
 
-            String end_cursor = (String) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject
-                    .get("data"))
-                    .get("user")).get("edge_follow")).get("page_info")).get("end_cursor");
-
-            boolean has_next_page = (boolean) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject
-                    .get("data"))
-                    .get("user")).get("edge_follow")).get("page_info")).get("has_next_page");
 
             return postedges;
         } catch (IOException e) {

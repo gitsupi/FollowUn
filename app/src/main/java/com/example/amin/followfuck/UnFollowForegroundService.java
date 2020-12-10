@@ -11,7 +11,7 @@ import com.example.amin.followfuck.instgram.Reqs;
 import com.example.amin.followfuck.instgram.ResponseAction;
 import com.example.amin.followfuck.instgram.StatusCodes;
 import com.example.amin.followfuck.instgram.UnfollowMyFollowingsService;
-import com.example.amin.followfuck.instgram.models.Followings;
+import com.example.amin.followfuck.instgram.models.ContinuedEdges;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +48,7 @@ public class UnFollowForegroundService extends Service {
 
 
             UnfollowMyFollowingsService unfollowMyFollowingsService = new UnfollowMyFollowingsService();
-            Followings firstsfollowings = null;
+            ContinuedEdges firstsfollowings = null;
             try {
 
                 firstsfollowings = unfollowMyFollowingsService.findFirstsfollowings();
@@ -69,7 +69,7 @@ public class UnFollowForegroundService extends Service {
             while (has_next_page) {
                 try {
 
-                    Followings aftersfollowings = unfollowMyFollowingsService.findAftersfollowings(end_cursor);
+                    ContinuedEdges aftersfollowings = unfollowMyFollowingsService.findAftersfollowings(end_cursor);
                     has_next_page = aftersfollowings.has_next_page;
                     end_cursor = aftersfollowings.end_cursor;
                     if (delay++ < 50) {

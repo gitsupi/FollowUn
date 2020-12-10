@@ -1,7 +1,7 @@
 package com.example.amin.followfuck.instgram;
 
 import com.example.amin.followfuck.BusinessContext;
-import com.example.amin.followfuck.instgram.models.Followings;
+import com.example.amin.followfuck.instgram.models.ContinuedEdges;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,7 +43,7 @@ public class UnfollowMyFollowingsService {
 
     }
 
-    public Followings findFirstsfollowings() throws Exception {
+    public ContinuedEdges findFirstsfollowings() throws Exception {
 
         String id = "38081432117";// my id
         String par2 = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":false,\"first\":12}", id);
@@ -81,7 +81,7 @@ public class UnfollowMyFollowingsService {
                     .get("data"))
                     .get("user")).get("edge_follow")).get("page_info")).get("has_next_page");
 
-            return new Followings(postedges, end_cursor, has_next_page);
+            return new ContinuedEdges(postedges, end_cursor, has_next_page);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -91,7 +91,7 @@ public class UnfollowMyFollowingsService {
     }
 
 
-    public Followings findAftersfollowings(String endcursor) throws Exception {
+    public ContinuedEdges findAftersfollowings(String endcursor) throws Exception {
 
         String id = BusinessContext.UserID;// my id
 
@@ -128,7 +128,7 @@ public class UnfollowMyFollowingsService {
                     .get("data"))
                     .get("user")).get("edge_follow")).get("page_info")).get("has_next_page");
 
-            return new Followings(postedges, end_cursor, has_next_page);
+            return new ContinuedEdges(postedges, end_cursor, has_next_page);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
