@@ -38,7 +38,7 @@ public class UnfollowUnittest {
         String ev2 = URLEncoder.encode(par2);//first 1 i see
 
         String url = "https://www.instagram.com/graphql/query/?query_hash=d04b0a864b4b54837c0d870b0e77e076&variables=" + ev2;
-        System.out.println(url);
+        //System.out.println(url);
         url = "https://www.instagram.com/";
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -77,15 +77,15 @@ public class UnfollowUnittest {
 
             for (int i = 0; i < postedges.length(); i++) {
                 JSONObject node = (JSONObject) postedges.getJSONObject(i).get("node");
-                System.out.println(node.get("username"));
+                //System.out.println(node.get("username"));
                 String followingid = (String) node.get("id");
                 Response<ResponseBody> bodyResponse = unFollowingRequests.unfollow(LoginConfig.cookie, followingid).execute();
 
-                System.out.println(bodyResponse.code());
+                //System.out.println(bodyResponse.code());
 
                 String status = Objects.requireNonNull(bodyResponse.body()).string();
 
-                System.out.println(status);
+                //System.out.println(status);
 
                 Thread.sleep(1000);
             }

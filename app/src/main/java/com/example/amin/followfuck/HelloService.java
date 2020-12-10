@@ -70,7 +70,7 @@ public class HelloService extends Service {
                 }
 
                 if (mNotificationManager != null) {
-                    System.out.println("god is great"+i);
+                    //System.out.println("god is great"+i);
                     mNotificationManager.notify(1,builder.build());
 //                    break;
                 }
@@ -96,7 +96,7 @@ public class HelloService extends Service {
         // main thread, which we don't want to block. We also make it
         // background priority so CPU-intensive work doesn't disrupt our UI.
         Notif.notify(this,"mokh");
-        System.out.println("on create servie ");
+        //System.out.println("on create servie ");
         HandlerThread thread = new HandlerThread("ServiceStartArguments", THREAD_PRIORITY_BACKGROUND);
         thread.start();
 

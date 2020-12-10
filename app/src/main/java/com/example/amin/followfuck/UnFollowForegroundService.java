@@ -40,7 +40,7 @@ public class UnFollowForegroundService extends Service {
                 .setOnlyAlertOnce(true)
 //                .setContentIntent(pendingIntent)
                 ;
-        System.out.println("gooogle");
+        //System.out.println("gooogle");
         startForeground(2, builder.build());
 
 
@@ -72,8 +72,8 @@ public class UnFollowForegroundService extends Service {
                     Followings aftersfollowings = unfollowMyFollowingsService.findAftersfollowings(end_cursor);
                     has_next_page = aftersfollowings.has_next_page;
                     end_cursor = aftersfollowings.end_cursor;
-                    if (delay++ < 100) {
-                        builder.setContentText("delaying ");
+                    if (delay++ < 50) {
+                        builder.setContentText("delaying "+delay);
                         startForeground(2, builder.build());
                         continue;
                     }

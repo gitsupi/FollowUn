@@ -1,4 +1,4 @@
-package com.example.amin.followfuck;
+package com.example.amin.followfuck.instgram.services.likerofpost;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -7,7 +7,9 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
-import com.example.amin.followfuck.instgram.AddFollwerService;
+import com.example.amin.followfuck.BusinessContext;
+import com.example.amin.followfuck.MainActivity;
+import com.example.amin.followfuck.R;
 import com.example.amin.followfuck.instgram.Reqs;
 import com.example.amin.followfuck.instgram.ResponseAction;
 import com.example.amin.followfuck.instgram.StatusCodes;
@@ -18,7 +20,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class FollowForegroundService extends Service {
+public class FollowLikersForegroundService extends Service {
     public static final String CHANNEL_ID = "ForegroundServiceChannel";
 
 
@@ -44,17 +46,25 @@ public class FollowForegroundService extends Service {
         new Thread(() -> {
             for (int i = 0; true; i++) {
 
-
-                AddFollwerService addFollwerService = new AddFollwerService();
-                String celebrityId = addFollwerService.selectRandomCelebrityId(fullname -> {
-
-
-                    builder.setContentTitle(fullname + " followers")
-                            .setContentText(fullname + " selected");
-                    startForeground(3, builder.build());
-                });
+                String shortcode = "";
+                UsersofLikedService addFollwerService = new UsersofLikedService();
                 try {
-                    JSONArray firstsfollowers = addFollwerService.findFirstsfollowers(celebrityId);
+                    shortcode = addFollwerService.lastpostShortcode(fullname -> {
+
+                        builder.setContentTitle(fullname + " followers")
+                                .setContentText(fullname + " selected");
+                        startForeground(3, builder.build());
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (shortcode.equals(""))
+                    continue;
+
+                try {
+                    JSONArray firstsfollowers = addFollwerService.find(shortcode);
                     addFollwerService.startfollowFollowers(firstsfollowers, new ResponseAction() {
                         @Override
                         public void applyBeforeSendRequest(Object instaUsername) {
@@ -89,7 +99,7 @@ public class FollowForegroundService extends Service {
 
                 long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 15 * 1000);
                 try {
-                    String resp = Reqs.getReq("https://www.instagram.com/"+BusinessContext.Username+"/?__a=1");
+                    String resp = Reqs.getReq("https://www.instagram.com/" + BusinessContext.Username + "/?__a=1");
                     JSONObject jsonObject = new JSONObject(resp);
                     JSONObject user = (JSONObject) ((JSONObject) jsonObject.get("graphql")).get("user");
                     Integer countedge_follow = ((Integer) ((JSONObject) user.get("edge_follow")).get("count"));
@@ -105,12 +115,12 @@ public class FollowForegroundService extends Service {
                     e.printStackTrace();
                 }
 
-                int k=0;
-                while (k<10) {
+                int k = 0;
+                while (k < 10) {
                     try {
-                        builder.setContentText(millis *k/ 600000 + "m time of wait.passed..");
+                        builder.setContentText(millis * k / 600000 + "m time of wait.passed..");
                         startForeground(3, builder.build());
-                        Thread.sleep(millis/10);
+                        Thread.sleep(millis / 10);
                         k++;
                     } catch (InterruptedException e) {
                         e.printStackTrace();

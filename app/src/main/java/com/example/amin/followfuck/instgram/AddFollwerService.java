@@ -17,7 +17,7 @@ public class AddFollwerService {
     public void startfollowFollowers(JSONArray followersOfinfluencers, ResponseAction responseAction) throws JSONException, IOException {
 
         for (int i = 0; i < followersOfinfluencers.length(); i++) {
-            System.out.println(i);
+            //System.out.println(i);
             JSONObject node = (JSONObject) followersOfinfluencers.getJSONObject(i).get("node");
             String followingid = (String) node.get("id");
 
@@ -32,10 +32,13 @@ public class AddFollwerService {
 
     public String selectRandomCelebrityId(ShowTitleNotification showTitleNotification) {
 
-        String[] ids = {"1296464116", "305851563", "373148161", "241999282", "1705191588", "438501706", "639139147"
-                , "1791861245", "994174586", "360507308", "1929875881", "540559218", "461064840", "145715496"
-                , "682153522", "28025883"};
+        String[] ids = {"305851563"};
 
+/*
+* , "1296464116", "373148161", "241999282", "1705191588", "438501706", "639139147"
+                , "1791861245", "994174586", "360507308", "1929875881", "540559218", "461064840", "145715496"
+                , "682153522", "28025883"
+                */
         String idofInbfluencer = ids[(int) (Math.random() * 1000000) % ids.length];
         try {
             String s = UsernameFinder.find(idofInbfluencer);
@@ -101,7 +104,7 @@ public class AddFollwerService {
 
     }
 
-    private int sendFollowingRequest(String followerId) throws IOException {
+    public int sendFollowingRequest(String followerId) throws IOException {
         String uri = "https://www.instagram.com/web/friendships/" + followerId + "/follow/";
 
 //        Retrofit retrofit = new Retrofit.Builder()
@@ -131,7 +134,7 @@ public class AddFollwerService {
         final OkHttpClient client = new OkHttpClient();
 
         okhttp3.Response re = client.newCall(request).execute();
-        System.out.println(re.body().string());
+//        //System.out.println(re.body().string());
         return re.code();
 
 //        httpPost.setEntity(null);

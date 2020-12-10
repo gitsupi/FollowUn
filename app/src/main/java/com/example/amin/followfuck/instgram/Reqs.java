@@ -22,12 +22,15 @@ public class Reqs {
                 .build();
 
         Request request = new Request.Builder()
+                .addHeader("cookie",LoginConfig.cookie)
                 .url(url)
                 .build();
 
         try (
                 Response response = client.newCall(request).execute()) {
-            return response.body().string();
+            String string = response.body().string();
+            //System.out.println(string);
+            return string;
         }
     }
 }

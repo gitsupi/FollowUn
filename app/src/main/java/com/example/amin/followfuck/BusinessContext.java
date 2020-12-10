@@ -16,8 +16,8 @@ public class BusinessContext {
     public static void initsetup() {
         Callable<Object> callable = Executors.callable(() -> {
             try {
-                System.out.println("we arfe in ");
-                Username = UsernameFinder.find(UserID);
+                BusinessContext.Username = UsernameFinder.find(UserID);
+                //System.out.println("we arfe in " + BusinessContext.Username);
             } catch (IOException e) {
 
             } catch (JSONException e) {

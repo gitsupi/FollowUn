@@ -52,10 +52,10 @@ public class CommnetTest {
             try {
                 execute = call.execute();
                 ResponseBody body = execute.body();
-                System.out.println(execute.code());
+                //System.out.println(execute.code());
                 String string = body.string();
                 JSONObject jsonObject = new JSONObject(string);
-                System.out.println(string);
+                //System.out.println(string);
                 Thread.sleep(2 * 60 * 1000);
 
 

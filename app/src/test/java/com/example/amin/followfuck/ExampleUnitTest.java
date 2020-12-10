@@ -25,13 +25,7 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
 
-        try {
-            System.out.println(UsernameFinder.find("373148161"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        //System.out.println(UsernameFinder.find("373148161"));
 
 
         String id = "8916622827";// last post
@@ -45,7 +39,7 @@ public class ExampleUnitTest {
         String ev2 = URLEncoder.encode(par2);//first 1 i see
 
         String url = "https://www.instagram.com/graphql/query/?query_hash=c76146de99bb02f6415203be841dd25a&variables=" + ev;
-        System.out.println(url);
+        //System.out.println(url);
         url = "https://www.instagram.com/";
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -68,7 +62,7 @@ public class ExampleUnitTest {
 
             JSONObject jsonObject = new JSONObject(string);
 
-            System.out.println(string);
+            //System.out.println(string);
 
         } catch (IOException e) {
             e.printStackTrace();
