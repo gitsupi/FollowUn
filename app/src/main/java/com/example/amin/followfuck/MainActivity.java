@@ -36,10 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         new Thread(BusinessContext::initsetup).start();
 //        startLikersService();
-        startService();
-
-
-        startunfoloowService();
+//        startunfoloowService();
+//        startService();
 
 
     }

@@ -2,5 +2,11 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#d4d4d4</color>
+    <color name="logincolor">#fe04a1ea</color>
+    <color name="logincolor2">#fe54b7e6</color>
+    <color name="tool">#feeef1f2</color>
+    <color name="bordercolor">#fed8dbdb</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>
