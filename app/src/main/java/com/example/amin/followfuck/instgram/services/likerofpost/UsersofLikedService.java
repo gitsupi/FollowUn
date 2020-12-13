@@ -1,11 +1,12 @@
 package com.example.amin.followfuck.instgram.services.likerofpost;
 
-import com.example.amin.followfuck.instgram.LoginConfig;
+import com.example.amin.followfuck.LoginConfig;
 import com.example.amin.followfuck.instgram.Reqs;
 import com.example.amin.followfuck.instgram.ResponseAction;
 import com.example.amin.followfuck.instgram.ShowTitleNotification;
 import com.example.amin.followfuck.instgram.StatusCodes;
 import com.example.amin.followfuck.instgram.UsernameFinder;
+import com.example.amin.followfuck.instgram.models.ContinuedEdges;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,12 +57,8 @@ public class UsersofLikedService {
         JSONObject jsonObject = new JSONObject(resp);
         JSONObject user = (JSONObject) ((JSONObject) jsonObject.get("graphql")).get("user");
 
-        String s = ((JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) user.get("edge_owner_to_timeline_media")).get("edges")).get(0))
+        return ((JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) user.get("edge_owner_to_timeline_media")).get("edges")).get(0))
                 .get("node")).get("shortcode").toString();
-
-        String shortcode =s;
-        System.out.println("short code "+shortcode);
-        return shortcode;
     }
 
 
@@ -116,7 +113,7 @@ public class UsersofLikedService {
     }
 
 
-    public JSONArray find(String shortcode) throws Exception {
+    public ContinuedEdges findfirstlikmers(String shortcode) throws Exception {
         HashMap<String, String> objectObjectHashMap = new HashMap<>();
 
         String par2 = String.format("{\"shortcode\":\"%s\",\"include_reel\":true,\"first\":24}", shortcode);
@@ -147,11 +144,10 @@ public class UsersofLikedService {
                     .get("edges");
 
             JSONObject page_info = (JSONObject) edgelikedby.get("page_info");
-            String end_curser = page_info.get("end_cursor").toString();
+            String end_cursor = page_info.get("end_cursor").toString();
             boolean has_next_page = ((boolean) page_info.get("has_next_page"));
 
-
-            return postedges;
+            return new ContinuedEdges(postedges, end_cursor, has_next_page);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

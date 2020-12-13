@@ -1,5 +1,7 @@
 package com.example.amin.followfuck.instgram;
 
+import com.example.amin.followfuck.LoginConfig;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

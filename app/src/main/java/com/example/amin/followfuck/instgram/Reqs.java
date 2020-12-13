@@ -1,5 +1,7 @@
 package com.example.amin.followfuck.instgram;
 
+import com.example.amin.followfuck.LoginConfig;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -22,7 +24,7 @@ public class Reqs {
                 .build();
 
         Request request = new Request.Builder()
-                .addHeader("cookie",LoginConfig.cookie)
+                .addHeader("cookie", LoginConfig.cookie)
                 .url(url)
                 .build();
 

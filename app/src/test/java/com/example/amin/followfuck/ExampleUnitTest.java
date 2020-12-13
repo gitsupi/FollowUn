@@ -1,6 +1,5 @@
 package com.example.amin.followfuck;
 
-import com.example.amin.followfuck.instgram.LoginConfig;
 import com.example.amin.followfuck.instgram.services.hashtag.HashTagApi;
 
 import org.json.JSONException;
@@ -26,7 +25,7 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
 
-        //System.out.println(UsernameFinder.find("373148161"));
+        //System.out.println(UsernameFinder.findfirstlikers("373148161"));
 
 
         String id = "8916622827";// last post

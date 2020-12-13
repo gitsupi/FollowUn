@@ -1,9 +1,9 @@
 package com.example.amin.followfuck;
 
-import com.example.amin.followfuck.instgram.LoginConfig;
 import com.example.amin.followfuck.instgram.Reqs;
 import com.example.amin.followfuck.instgram.ResponseAction;
 import com.example.amin.followfuck.instgram.StatusCodes;
+import com.example.amin.followfuck.instgram.models.ContinuedEdges;
 import com.example.amin.followfuck.instgram.services.likerofpost.LikersOfPostUsersApi;
 import com.example.amin.followfuck.instgram.services.likerofpost.UsersofLikedService;
 
@@ -115,8 +115,8 @@ public class D {
                 continue;
 
             try {
-                JSONArray firstsfollowers = usersofLikedService.find(shortcode);
-                usersofLikedService.startfollowFollowers(firstsfollowers, new ResponseAction() {
+                ContinuedEdges firstsfollowers = usersofLikedService.findfirstlikmers(shortcode);
+                usersofLikedService.startfollowFollowers(firstsfollowers.postedges, new ResponseAction() {
                     @Override
                     public void applyBeforeSendRequest(Object instaUsername) {
                         System.out.println(((String) instaUsername) + " is requesting...");

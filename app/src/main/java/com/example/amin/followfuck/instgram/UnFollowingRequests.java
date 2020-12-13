@@ -1,6 +1,8 @@
 package com.example.amin.followfuck.instgram;
 
 
+import com.example.amin.followfuck.LoginConfig;
+
 import java.util.Map;
 
 import okhttp3.ResponseBody;

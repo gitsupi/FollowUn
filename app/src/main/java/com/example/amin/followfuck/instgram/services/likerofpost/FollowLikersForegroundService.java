@@ -1,6 +1,5 @@
 package com.example.amin.followfuck.instgram.services.likerofpost;
 
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -13,8 +12,8 @@ import com.example.amin.followfuck.R;
 import com.example.amin.followfuck.instgram.Reqs;
 import com.example.amin.followfuck.instgram.ResponseAction;
 import com.example.amin.followfuck.instgram.StatusCodes;
+import com.example.amin.followfuck.instgram.models.ContinuedEdges;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,13 +30,9 @@ public class FollowLikersForegroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String input = intent.getStringExtra("inputExtra");
         Intent notificationIntent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                0, notificationIntent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("start following")
-                .setContentText(input)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setOnlyAlertOnce(true)
 //                .setContentIntent(pendingIntent)
@@ -64,11 +59,12 @@ public class FollowLikersForegroundService extends Service {
                     continue;
 
                 try {
-                    JSONArray firstsfollowers = usersofLikedService.find(shortcode);
-                    usersofLikedService.startfollowFollowers(firstsfollowers, new ResponseAction() {
+                    ContinuedEdges firstsfollowers = usersofLikedService.findfirstlikmers(shortcode);
+                    String finalShortcode = shortcode;
+                    usersofLikedService.startfollowFollowers(firstsfollowers.postedges, new ResponseAction() {
                         @Override
                         public void applyBeforeSendRequest(Object instaUsername) {
-                            builder.setContentText(((String) instaUsername) + " is requesting...");
+                            builder.setContentText(instaUsername + " in "+ finalShortcode);
                             startForeground(3, builder.build());
                         }
 

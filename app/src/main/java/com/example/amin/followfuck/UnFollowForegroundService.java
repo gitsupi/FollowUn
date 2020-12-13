@@ -72,7 +72,7 @@ public class UnFollowForegroundService extends Service {
                     ContinuedEdges aftersfollowings = unfollowMyFollowingsService.findAftersfollowings(end_cursor);
                     has_next_page = aftersfollowings.has_next_page;
                     end_cursor = aftersfollowings.end_cursor;
-                    if (delay++ < 50) {
+                    if (delay++ < 3) {
                         builder.setContentText("delaying "+delay);
                         startForeground(2, builder.build());
                         continue;

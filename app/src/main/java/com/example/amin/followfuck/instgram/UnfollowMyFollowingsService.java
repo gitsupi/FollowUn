@@ -1,6 +1,7 @@
 package com.example.amin.followfuck.instgram;
 
 import com.example.amin.followfuck.BusinessContext;
+import com.example.amin.followfuck.LoginConfig;
 import com.example.amin.followfuck.instgram.models.ContinuedEdges;
 
 import org.json.JSONArray;
@@ -18,12 +19,12 @@ import retrofit2.Retrofit;
 
 public class UnfollowMyFollowingsService {
 
-    public void startUnfollowMyfollowing(JSONArray followersOfinfluencers
+    public void startUnfollowMyfollowing(JSONArray myfollowings
             , ResponseAction responseAction) throws JSONException, IOException {
 
-        for (int i = 0; i < followersOfinfluencers.length(); i++) {
+        for (int i = 0; i < myfollowings.length(); i++) {
             System.out.println(i);
-            JSONObject node = (JSONObject) followersOfinfluencers.getJSONObject(i).get("node");
+            JSONObject node = (JSONObject) myfollowings.getJSONObject(i).get("node");
             String followingid = (String) node.get("id");
 
             String username = (String) node.get("username");
@@ -31,7 +32,7 @@ public class UnfollowMyFollowingsService {
 
             int resonsecode = sendUnfollow(followingid);
 
-            if (resonsecode == StatusCodes.OK) responseAction.applyAfterSucces(username);
+            if (resonsecode == StatusCodes.OK) responseAction.applyAfterSucces("i="+(i+1)+username);
             else responseAction.applyAfterFollowError(username, resonsecode);
 
             try {
@@ -45,8 +46,7 @@ public class UnfollowMyFollowingsService {
 
     public ContinuedEdges findFirstsfollowings() throws Exception {
 
-        String id = "38081432117";// my id
-        String par2 = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":false,\"first\":12}", id);
+        String par2 = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":false,\"first\":14}", BusinessContext.UserID);
         String url = "https://www.instagram.com/";
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -95,7 +95,7 @@ public class UnfollowMyFollowingsService {
 
         String id = BusinessContext.UserID;// my id
 
-        String par22 = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":false,\"first\":16," +
+        String par22 = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":false,\"first\":14," +
                 "\"after\":\"%s\"}", id, endcursor);
         String url = "https://www.instagram.com/";
         Retrofit retrofit = new Retrofit.Builder()

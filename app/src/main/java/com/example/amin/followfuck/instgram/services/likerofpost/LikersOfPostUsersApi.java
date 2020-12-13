@@ -1,8 +1,7 @@
 package com.example.amin.followfuck.instgram.services.likerofpost;
 
-import com.example.amin.followfuck.instgram.LoginConfig;
+import com.example.amin.followfuck.LoginConfig;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.ResponseBody;

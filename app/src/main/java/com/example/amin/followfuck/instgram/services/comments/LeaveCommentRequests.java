@@ -1,9 +1,7 @@
 package com.example.amin.followfuck.instgram.services.comments;
 
 
-import com.example.amin.followfuck.instgram.LoginConfig;
-
-import java.util.Map;
+import com.example.amin.followfuck.LoginConfig;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
