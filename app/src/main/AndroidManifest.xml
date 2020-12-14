@@ -17,9 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
         </activity>
         <activity
-
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -32,11 +32,11 @@
 
         <service android:name=".HelloService" />
         <service
-            android:name=".FollowForegroundService"
+            android:name=".instgram.FollowForegroundService"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".UnFollowForegroundService"
+            android:name=".instgram.UnFollowForegroundService"
             android:enabled="true"
             android:exported="true" />
         <service android:name=".instgram.services.likerofpost.FollowLikersForegroundService" />

@@ -15,6 +15,8 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -22,8 +24,36 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import static com.example.amin.followfuck.BusinessContext.initsetup;
+import static org.junit.Assert.assertEquals;
 
 public class D {
+
+
+
+    @Test
+    public void kd() {
+        CompletableFuture<String> future
+                = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(1000);
+                throw new RuntimeException("3434");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "Hello";
+        }).exceptionally((t)->{
+            System.out.println("god "+t);
+            return "Hello";
+        })
+                ;
+        try {
+            assertEquals("Hello", future.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
     @Test
     public void k() {
         try {

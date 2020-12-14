@@ -16,6 +16,8 @@ import android.os.Message;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
+import com.example.amin.followfuck.instgram.Notif;
+
 import static android.os.Process.THREAD_PRIORITY_BACKGROUND;
 
 public class HelloService extends Service {

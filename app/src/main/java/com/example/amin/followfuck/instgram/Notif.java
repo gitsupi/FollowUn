@@ -1,4 +1,4 @@
-package com.example.amin.followfuck;
+package com.example.amin.followfuck.instgram;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+
+import com.example.amin.followfuck.R;
 
 public class Notif {
 

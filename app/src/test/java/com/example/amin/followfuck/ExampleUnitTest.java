@@ -12,7 +12,6 @@ import java.util.HashMap;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -22,6 +21,12 @@ import retrofit2.Retrofit;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+    @Test
+
+    public void addition_isddCorrect() {
+
+
+    }
     @Test
     public void addition_isCorrect() {
 

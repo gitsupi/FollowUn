@@ -1,4 +1,4 @@
-package com.example.amin.followfuck;
+package com.example.amin.followfuck.instgram;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -7,6 +7,9 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
+import com.example.amin.followfuck.BusinessContext;
+import com.example.amin.followfuck.MainActivity;
+import com.example.amin.followfuck.R;
 import com.example.amin.followfuck.instgram.Reqs;
 import com.example.amin.followfuck.instgram.ResponseAction;
 import com.example.amin.followfuck.instgram.StatusCodes;

@@ -1,4 +1,4 @@
-package com.example.amin.followfuck;
+package com.example.amin.followfuck.instgram;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -7,6 +7,9 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
+import com.example.amin.followfuck.BusinessContext;
+import com.example.amin.followfuck.MainActivity;
+import com.example.amin.followfuck.R;
 import com.example.amin.followfuck.instgram.AddFollwerService;
 import com.example.amin.followfuck.instgram.Reqs;
 import com.example.amin.followfuck.instgram.ResponseAction;
@@ -89,7 +92,7 @@ public class FollowForegroundService extends Service {
 
                 long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 15 * 1000);
                 try {
-                    String resp = Reqs.getReq("https://www.instagram.com/"+BusinessContext.Username+"/?__a=1");
+                    String resp = Reqs.getReq("https://www.instagram.com/"+ BusinessContext.Username+"/?__a=1");
                     JSONObject jsonObject = new JSONObject(resp);
                     JSONObject user = (JSONObject) ((JSONObject) jsonObject.get("graphql")).get("user");
                     Integer countedge_follow = ((Integer) ((JSONObject) user.get("edge_follow")).get("count"));

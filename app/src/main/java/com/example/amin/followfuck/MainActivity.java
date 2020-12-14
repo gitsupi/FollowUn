@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.amin.followfuck.instgram.FollowForegroundService;
+import com.example.amin.followfuck.instgram.UnFollowForegroundService;
 import com.example.amin.followfuck.instgram.services.likerofpost.FollowLikersForegroundService;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new Thread(BusinessContext::initsetup).start();
+//        new Thread(BusinessContext::initsetup).start();
 //        startLikersService();
-//        startunfoloowService();
-//        startService();
+        startunfoloowService();
+        startService();
 
 
     }
