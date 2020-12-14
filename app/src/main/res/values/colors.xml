@@ -9,4 +9,16 @@
     <color name="bordercolor">#fed8dbdb</color>
 
     <color name="black_overlay">#66000000</color>
+
+
+
+
+
+    <color name="btn_signup_blue">#0097f6</color>
+    <color name="btn_login_blue">#0d9cf6</color>
+    <color name="language_picker">#a0a0a0</color>
+    <color name="signup">#234669</color>
+    <color name="edtxtback">#fafafa</color>
+    <color name="fblogin">#038ef8</color>
+    <color name="gray">#808080</color>
 </resources>

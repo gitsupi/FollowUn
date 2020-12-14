@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -28,11 +29,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.amin.followfuck.instgramapi.V0LoginApi;
+import com.example.amin.followfuck.instgramapi.login.ExceptionalRespnse;
+import com.example.amin.followfuck.instgramapi.login.JsoupException;
+import com.example.amin.followfuck.instgramapi.login.NullStringResponseException;
+import com.example.amin.followfuck.instgramapi.login.OKHttpExecuteException;
+import com.example.amin.followfuck.instgramapi.login.ResponseTostringException;
+import com.example.amin.followfuck.instgramapi.login.V0LoginApi;
 
 import org.json.JSONException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -248,6 +253,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         " = ?", new String[]{ContactsContract.CommonDataKinds.Email
                                                                      .CONTENT_ITEM_TYPE},
 
+
                 // Show primary email addresses first. Note that there won't be
                 // a primary email address if the user hasn't specified one.
                 ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
@@ -294,6 +300,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
+//    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
@@ -307,12 +314,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
+
             try {
-                V0LoginApi.setLoginPropertiesASync(mEmail, mPassword);
+                V0LoginApi.performLogin(mEmail, mPassword);
+
                 return true;
-            } catch (IOException e) {
+            } catch (JsoupException e) {
                 return false;
             } catch (JSONException e) {
+                return false;
+            } catch (OKHttpExecuteException e) {
+                return false;
+            } catch (ResponseTostringException e) {
+                return false;
+            } catch (ExceptionalRespnse exceptionalRespnse) {
+                return false;
+            } catch (NullStringResponseException e) {
                 return false;
             }
 
@@ -328,6 +345,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 Toast.makeText(LoginActivity.this, "success loing insta",
                         Toast.LENGTH_LONG).show();
+
+                Intent myIntent = new Intent(LoginActivity.this, WelcomeActivity.class);
+
+//                myIntent.putExtra("key", value); //Optional parameters
+                LoginActivity.this.startActivity(myIntent);
 
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

@@ -28,6 +28,22 @@ import static org.junit.Assert.assertEquals;
 
 public class D {
 
+    public  <T> T requireNonNull(T obj) {
+        if (obj == null)
+            throw new NullPointerException();
+        return obj;
+    }
+
+    @Test
+    public void ddd() {
+        try {
+            requireNonNull(null);
+        } catch (NullPointerException e) {
+            System.out.println("nulll");
+        }
+
+    }
+
 
 
     @Test

@@ -1,5 +1,6 @@
 package com.example.amin.followfuck.instgramapi;
 
+import com.example.amin.followfuck.BusinessContext;
 import com.example.amin.followfuck.LoginConfig;
 
 import okhttp3.OkHttpClient;
@@ -24,7 +25,7 @@ public class Reqs {
                 .build();
 
         Request request = new Request.Builder()
-                .addHeader("cookie", LoginConfig.cookie)
+                .addHeader("cookie", BusinessContext.cookie)
                 .url(url)
                 .build();
 

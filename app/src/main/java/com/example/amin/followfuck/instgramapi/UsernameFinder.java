@@ -12,11 +12,7 @@ public class UsernameFinder {
         //System.out.println(url);
         String resp = Reqs.getReq(url);
         JSONObject jsonObject = null;
-        try {
-            jsonObject = new JSONObject(resp);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        jsonObject = new JSONObject(resp);
         String username = (String) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject.get("data")).get("user")).get("reel"))
                 .get("user")).get("username");
         //System.out.println("username is " + username);
