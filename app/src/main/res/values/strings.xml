@@ -15,7 +15,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="userid">userid</string>
     <string name="username">username</string>
+    <string name="cookie">cookie</string>
+    <string name="csrftoken">csrftoken</string>
     <string name="title_activity_main2">Main2Activity</string>
 
 

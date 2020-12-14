@@ -1,5 +1,6 @@
 package com.example.amin.followfuck.instgramapi.services.likerofpost;
 
+import com.example.amin.followfuck.BusinessContext;
 import com.example.amin.followfuck.LoginConfig;
 import com.example.amin.followfuck.instgramapi.Reqs;
 import com.example.amin.followfuck.instgramapi.ResponseAction;
@@ -95,13 +96,15 @@ public class UsersofLikedService {
 
         builder.addHeader("Content-type", "application/x-www-form-urlencoded");
         builder.addHeader("referer", "https://www.instagram.com/p/B7nf91_hkaQ/");
-        builder.addHeader("x-csrftoken", LoginConfig.csrftoken);
+
+        builder.addHeader("cookie", BusinessContext.cookie);
+        builder.addHeader("x-csrftoken", BusinessContext.csrftoken);
+
         builder.addHeader("x-ig-app-id", LoginConfig.XIG_APP_ID);
-        builder.addHeader("x-ig-www-claim", LoginConfig.X_IG_WWW_CLAIM);
+//        builder.addHeader("x-ig-www-claim", LoginConfig.X_IG_WWW_CLAIM);
 //        builder.addHeader("x-instagram-ajax", LoginConfig.X_INSTAGRAM_AJAX);
         builder.addHeader("x-requested-with", "XMLHttpRequest");
         builder.addHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
-        builder.addHeader("cookie", LoginConfig.cookie);
 
         Request request = builder
                 .build();
@@ -125,7 +128,8 @@ public class UsersofLikedService {
         LikersOfPostUsersApi likersOfPostUsersApi = retrofit.create(LikersOfPostUsersApi.class);
         objectObjectHashMap.put("query_hash", "d5d763b1e2acf209d62d22d184488e57");
         objectObjectHashMap.put("variables", par2);
-        Call<ResponseBody> call = likersOfPostUsersApi.getLastFollowings(LoginConfig.cookie, objectObjectHashMap);
+        Call<ResponseBody> call = likersOfPostUsersApi.getLastFollowings(BusinessContext.cookie
+                , BusinessContext.csrftoken, objectObjectHashMap);
 
         Response<ResponseBody> execute;
         try {

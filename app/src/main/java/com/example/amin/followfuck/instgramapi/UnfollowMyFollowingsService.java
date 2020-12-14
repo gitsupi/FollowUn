@@ -1,7 +1,6 @@
 package com.example.amin.followfuck.instgramapi;
 
 import com.example.amin.followfuck.BusinessContext;
-import com.example.amin.followfuck.LoginConfig;
 import com.example.amin.followfuck.instgramapi.models.ContinuedEdges;
 
 import org.json.JSONArray;
@@ -56,7 +55,7 @@ public class UnfollowMyFollowingsService {
         HashMap<String, String> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("query_hash", "d04b0a864b4b54837c0d870b0e77e076");
         objectObjectHashMap.put("variables", par2);
-        Call<ResponseBody> call = unFollowingRequests.getLastFollowings(LoginConfig.cookie, objectObjectHashMap);
+        Call<ResponseBody> call = unFollowingRequests.getLastFollowings(BusinessContext.cookie,BusinessContext.csrftoken, objectObjectHashMap);
 
         Response<ResponseBody> execute;
         try {
@@ -106,7 +105,8 @@ public class UnfollowMyFollowingsService {
         HashMap<String, String> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("query_hash", "d04b0a864b4b54837c0d870b0e77e076");
         objectObjectHashMap.put("variables", par22);
-        Call<ResponseBody> call = unFollowingRequests.getLastFollowings(LoginConfig.cookie, objectObjectHashMap);
+        Call<ResponseBody> call = unFollowingRequests.getLastFollowings(BusinessContext.cookie
+                , BusinessContext.csrftoken, objectObjectHashMap);
         Response<ResponseBody> execute;
         try {
             execute = call.execute();
@@ -145,7 +145,8 @@ public class UnfollowMyFollowingsService {
                 .baseUrl(url)
                 .build();
         UnFollowingRequests unFollowingRequests = retrofit.create(UnFollowingRequests.class);
-        Response<ResponseBody> bodyResponse = unFollowingRequests.unfollow(LoginConfig.cookie, followingid).execute();
+        Response<ResponseBody> bodyResponse = unFollowingRequests.unfollow(BusinessContext.cookie
+                , BusinessContext.csrftoken, followingid).execute();
         return bodyResponse.code();
     }
 

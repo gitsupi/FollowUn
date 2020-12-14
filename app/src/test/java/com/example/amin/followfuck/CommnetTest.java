@@ -43,7 +43,8 @@ public class CommnetTest {
                     .build();
 
             LeaveCommentRequests leaveCommentRequests = retrofit.create(LeaveCommentRequests.class);
-            Call<ResponseBody> call = leaveCommentRequests.leaveAComment(LoginConfig.cookie, postid,
+            Call<ResponseBody> call = leaveCommentRequests.leaveAComment(BusinessContext.cookie,
+                    BusinessContext.csrftoken, postid,
                     " سلام وسیله بازی سگ دایرکت ✌"
                     , ""
             );

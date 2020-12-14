@@ -107,7 +107,7 @@ public class V0LoginApi {
             for (String header : response.headers("set-cookie")) {
                 if (header.contains(LoginConfig.CookieParamsForSendingFollow.csrftoken)) {
                     cookie = cookie + " " + header.split(";")[0] + ";";
-                    realcsrf = header.split(";")[0];
+                    realcsrf = header.split(";")[0].split("csrftoken=")[1];
                 }
                 if (header.contains(LoginConfig.CookieParamsForSendingFollow.sessionid))
                     cookie = cookie + " " + header.split(";")[0] + ";";

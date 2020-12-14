@@ -39,11 +39,6 @@
             android:exported="true" />
         <service android:name=".instgramapi.services.likerofpost.FollowLikersForegroundService" />
 
-        <activity
-            android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme"></activity>
-
 
         <activity android:name=".WelcomeActivity" />
     </application>

@@ -1,7 +1,5 @@
 package com.example.amin.followfuck.instgramapi.services.likerofpost;
 
-import com.example.amin.followfuck.LoginConfig;
-
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -15,12 +13,13 @@ public interface LikersOfPostUsersApi {
 
     @Headers({
             "x-requested-with: XMLHttpRequest",
-            "x-csrftoken: " + LoginConfig.csrftoken,
-            "x-ig-www-claim: " + LoginConfig.IGCLAIM,
+//            "x-ig-www-claim: " + LoginConfig.IGCLAIM,
             "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36"
     })
     @GET("graphql/query/")
-    Call<ResponseBody> getLastFollowings(@Header("cookie") String cookie,
+    Call<ResponseBody> getLastFollowings(
+            @Header("cookie") String cookie,
+            @Header("x-csrftoken") String csrftoken,
                                          @QueryMap Map<String, String> options);
 
 

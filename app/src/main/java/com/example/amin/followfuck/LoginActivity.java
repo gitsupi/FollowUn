@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-
+    SharedPreferences sharedPref;
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -70,17 +70,35 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        this.sharedPref = this.getSharedPreferences("GOD", Context.MODE_PRIVATE);
 
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.username), "unorfollow");
-        editor.apply();
+
+        String cookie = this.sharedPref.getString(getString(R.string.cookie), "");
+        if (!cookie.isEmpty()) {
+            String username = this.sharedPref.getString(getString(R.string.username), "");
+            String userid = this.sharedPref.getString(getString(R.string.userid), "");
+            String csrftoken = this.sharedPref.getString(getString(R.string.csrftoken), "");
+
+            BusinessContext.Username = username;
+            BusinessContext.UserID=userid;
+            BusinessContext.csrftoken = csrftoken;
+            BusinessContext.cookie = cookie;
+
+            Intent myIntent = new Intent(LoginActivity.this, WelcomeActivity.class);
+//                myIntent.putExtra("key", value); //Optional parameters
+            LoginActivity.this.startActivity(myIntent);
+        }
+
+
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        editor.putString(getString(R.string.username), "unorfollow");
+//        editor.apply();
 
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
-        mEmailView.setText(sharedPref.getString(getString(R.string.username), null));
+        mEmailView.setText(this.sharedPref.getString(getString(R.string.username), "kir"));
 
         populateAutoComplete();
 
@@ -341,19 +359,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-//                finish();
+                SharedPreferences.Editor editor = LoginActivity.this.sharedPref.edit();
+                editor.putString(getString(R.string.csrftoken), BusinessContext.csrftoken);
+                editor.putString(getString(R.string.cookie), BusinessContext.cookie);
+                editor.putString(getString(R.string.userid), BusinessContext.UserID);
+                editor.commit();
+
 
                 Toast.makeText(LoginActivity.this, "success loing insta",
                         Toast.LENGTH_LONG).show();
-
                 Intent myIntent = new Intent(LoginActivity.this, WelcomeActivity.class);
-
 //                myIntent.putExtra("key", value); //Optional parameters
                 LoginActivity.this.startActivity(myIntent);
 
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
+
+//                SharedPreferences sharedPref = LoginActivity.this.getSharedPreferences("GOD", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sharedPref.edit();
+//                editor.putString(getString(R.string.username), "BusinessContext.UserID");
+//                editor.commit();
             }
         }
 
