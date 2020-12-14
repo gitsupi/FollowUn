@@ -1,6 +1,6 @@
-package com.example.amin.followfuck.instgram.services.hashtag;
+package com.example.amin.followfuck.instgramapi.services.hashtag;
 
-import com.example.amin.followfuck.instgram.models.ContinuedEdges;
+import com.example.amin.followfuck.instgramapi.models.ContinuedEdges;
 
 import org.json.JSONArray;
 import org.json.JSONException;

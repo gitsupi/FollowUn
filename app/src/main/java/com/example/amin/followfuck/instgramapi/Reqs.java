@@ -1,4 +1,4 @@
-package com.example.amin.followfuck.instgram;
+package com.example.amin.followfuck.instgramapi;
 
 import com.example.amin.followfuck.LoginConfig;
 

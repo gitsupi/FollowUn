@@ -1,4 +1,4 @@
-package com.example.amin.followfuck.instgram.models;
+package com.example.amin.followfuck.instgramapi.models;
 
 import org.json.JSONArray;
 

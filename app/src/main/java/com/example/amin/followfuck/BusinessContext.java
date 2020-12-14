@@ -1,6 +1,6 @@
 package com.example.amin.followfuck;
 
-import com.example.amin.followfuck.instgram.UsernameFinder;
+import com.example.amin.followfuck.instgramapi.UsernameFinder;
 
 import org.json.JSONException;
 
@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 public class BusinessContext {
     public static String Username;
     public static String UserID;
-    public static String coockie;
+    public static String cookie;
     public static String csrftoken;
 
 

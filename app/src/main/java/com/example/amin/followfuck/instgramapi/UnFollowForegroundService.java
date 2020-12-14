@@ -1,4 +1,4 @@
-package com.example.amin.followfuck.instgram;
+package com.example.amin.followfuck.instgramapi;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -10,11 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import com.example.amin.followfuck.BusinessContext;
 import com.example.amin.followfuck.MainActivity;
 import com.example.amin.followfuck.R;
-import com.example.amin.followfuck.instgram.Reqs;
-import com.example.amin.followfuck.instgram.ResponseAction;
-import com.example.amin.followfuck.instgram.StatusCodes;
-import com.example.amin.followfuck.instgram.UnfollowMyFollowingsService;
-import com.example.amin.followfuck.instgram.models.ContinuedEdges;
+import com.example.amin.followfuck.instgramapi.models.ContinuedEdges;
 
 import org.json.JSONException;
 import org.json.JSONObject;

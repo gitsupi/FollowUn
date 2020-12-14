@@ -1,12 +1,12 @@
-package com.example.amin.followfuck.instgram.services.likerofpost;
+package com.example.amin.followfuck.instgramapi.services.likerofpost;
 
 import com.example.amin.followfuck.LoginConfig;
-import com.example.amin.followfuck.instgram.Reqs;
-import com.example.amin.followfuck.instgram.ResponseAction;
-import com.example.amin.followfuck.instgram.ShowTitleNotification;
-import com.example.amin.followfuck.instgram.StatusCodes;
-import com.example.amin.followfuck.instgram.UsernameFinder;
-import com.example.amin.followfuck.instgram.models.ContinuedEdges;
+import com.example.amin.followfuck.instgramapi.Reqs;
+import com.example.amin.followfuck.instgramapi.ResponseAction;
+import com.example.amin.followfuck.instgramapi.ShowTitleNotification;
+import com.example.amin.followfuck.instgramapi.StatusCodes;
+import com.example.amin.followfuck.instgramapi.UsernameFinder;
+import com.example.amin.followfuck.instgramapi.models.ContinuedEdges;
 
 import org.json.JSONArray;
 import org.json.JSONException;

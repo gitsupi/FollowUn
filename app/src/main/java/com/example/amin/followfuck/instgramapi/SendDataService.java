@@ -1,4 +1,4 @@
-package com.example.amin.followfuck.instgram;
+package com.example.amin.followfuck.instgramapi;
 
 import android.app.Service;
 import android.content.Intent;

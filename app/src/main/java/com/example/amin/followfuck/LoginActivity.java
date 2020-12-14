@@ -28,7 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.amin.followfuck.instgram.V0LoginApi;
+import com.example.amin.followfuck.instgramapi.V0LoginApi;
 
 import org.json.JSONException;
 

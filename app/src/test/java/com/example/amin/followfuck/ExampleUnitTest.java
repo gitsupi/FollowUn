@@ -1,6 +1,6 @@
 package com.example.amin.followfuck;
 
-import com.example.amin.followfuck.instgram.services.hashtag.HashTagApi;
+import com.example.amin.followfuck.instgramapi.services.hashtag.HashTagApi;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -32,14 +32,14 @@
 
         <service android:name=".HelloService" />
         <service
-            android:name=".instgram.FollowForegroundService"
+            android:name=".instgramapi.FollowForegroundService"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".instgram.UnFollowForegroundService"
+            android:name=".instgramapi.UnFollowForegroundService"
             android:enabled="true"
             android:exported="true" />
-        <service android:name=".instgram.services.likerofpost.FollowLikersForegroundService" />
+        <service android:name=".instgramapi.services.likerofpost.FollowLikersForegroundService" />
 
 
     </application>

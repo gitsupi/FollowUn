@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.amin.followfuck.instgram.FollowForegroundService;
-import com.example.amin.followfuck.instgram.UnFollowForegroundService;
-import com.example.amin.followfuck.instgram.services.likerofpost.FollowLikersForegroundService;
+import com.example.amin.followfuck.instgramapi.FollowForegroundService;
+import com.example.amin.followfuck.instgramapi.UnFollowForegroundService;
+import com.example.amin.followfuck.instgramapi.services.likerofpost.FollowLikersForegroundService;
 
 public class MainActivity extends AppCompatActivity {
 

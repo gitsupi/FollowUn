@@ -40,6 +40,6 @@ dependencies {
     testImplementation 'org.json:json:20200518'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-//    implementation 'com.github.instagram4j:instagram4j:2.0.1'
+    implementation 'com.github.instagram4j:instagram4j:2.0.1'
     implementation 'org.jsoup:jsoup:1.13.1'
 }

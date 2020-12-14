@@ -1,6 +1,6 @@
 package com.example.amin.followfuck;
 
-import com.example.amin.followfuck.instgram.UnFollowingRequests;
+import com.example.amin.followfuck.instgramapi.UnFollowingRequests;
 
 import org.json.JSONArray;
 import org.json.JSONException;

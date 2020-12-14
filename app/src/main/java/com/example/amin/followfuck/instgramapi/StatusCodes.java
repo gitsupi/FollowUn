@@ -1,4 +1,4 @@
-package com.example.amin.followfuck.instgram;
+package com.example.amin.followfuck.instgramapi;
 
 public class StatusCodes {
     public final static int OK=200;

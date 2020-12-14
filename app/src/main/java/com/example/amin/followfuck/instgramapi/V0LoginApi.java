@@ -1,4 +1,4 @@
-package com.example.amin.followfuck.instgram;
+package com.example.amin.followfuck.instgramapi;
 
 import com.example.amin.followfuck.BusinessContext;
 import com.example.amin.followfuck.LoginConfig;
@@ -93,7 +93,7 @@ public class V0LoginApi {
                     e.printStackTrace();
                 }
 
-                BusinessContext.coockie = cookie;
+                BusinessContext.cookie = cookie;
                 BusinessContext.csrftoken = realcsrf;
             }
         });

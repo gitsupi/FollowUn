@@ -1,8 +1,8 @@
-package com.example.amin.followfuck.instgram;
+package com.example.amin.followfuck.instgramapi;
 
 import com.example.amin.followfuck.BusinessContext;
 import com.example.amin.followfuck.LoginConfig;
-import com.example.amin.followfuck.instgram.models.ContinuedEdges;
+import com.example.amin.followfuck.instgramapi.models.ContinuedEdges;
 
 import org.json.JSONArray;
 import org.json.JSONException;
