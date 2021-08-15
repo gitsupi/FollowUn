@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.example.amin.followfuck.instgramapi.FollowForegroundService;
 import com.example.amin.followfuck.instgramapi.UnFollowForegroundService;
+import com.example.amin.followfuck.instgramapi.services.likerofpost.FollowLikersForegroundService;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -27,6 +28,12 @@ public class WelcomeActivity extends AppCompatActivity {
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 
+    public void startLikersService() {
+
+        Intent serviceIntent = new Intent(this, FollowLikersForegroundService.class);
+        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
+        ContextCompat.startForegroundService(this, serviceIntent);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,8 +51,9 @@ public class WelcomeActivity extends AppCompatActivity {
             System.out.println("in start fore");
         });
 
+        startLikersService();
         WelcomeActivity.this.startunfoloowService();
-        WelcomeActivity.this.startService();
+//        WelcomeActivity.this.startService();
 
     }
 }

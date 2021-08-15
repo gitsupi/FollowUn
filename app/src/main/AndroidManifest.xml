@@ -23,7 +23,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,7 +36,9 @@
             android:name=".instgramapi.UnFollowForegroundService"
             android:enabled="true"
             android:exported="true" />
-        <service android:name=".instgramapi.services.likerofpost.FollowLikersForegroundService" />
+        <service android:name=".instgramapi.services.likerofpost.FollowLikersForegroundService"
+            android:enabled="true"
+            android:exported="true" />
 
 
         <activity android:name=".WelcomeActivity" />

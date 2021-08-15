@@ -123,7 +123,7 @@ public class UnFollowForegroundService extends Service {
 
 
     private void wait(NotificationCompat.Builder builder) {
-        long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 15 * 1000);
+        long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 41 * 1000);
         try {
             String resp = Reqs.getReq("https://www.instagram.com/" + BusinessContext.Username + "/?__a=1");
             JSONObject jsonObject = new JSONObject(resp);

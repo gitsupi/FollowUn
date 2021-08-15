@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
-        mEmailView.setText(this.sharedPref.getString(getString(R.string.username), "kir"));
+        mEmailView.setText(this.sharedPref.getString(getString(R.string.username), ""));
 
         populateAutoComplete();
 

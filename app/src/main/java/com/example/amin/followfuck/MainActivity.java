@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public void startLikersService() {
 
         Intent serviceIntent = new Intent(this, FollowLikersForegroundService.class);
+        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
         ContextCompat.startForegroundService(this, serviceIntent);
     }
     @Override
@@ -36,10 +37,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        new Thread(BusinessContext::initsetup).start();
-//        startLikersService();
-        startunfoloowService();
-        startService();
+//        new Thetering().starttheering(this);
+
+        new Thread(BusinessContext::initsetup).start();
+        startLikersService();
+//        startunfoloowService();
+
+//        startService();
 
 
     }

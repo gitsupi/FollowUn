@@ -13,6 +13,7 @@ import com.example.amin.followfuck.instgramapi.Reqs;
 import com.example.amin.followfuck.instgramapi.ResponseAction;
 import com.example.amin.followfuck.instgramapi.StatusCodes;
 import com.example.amin.followfuck.instgramapi.models.ContinuedEdges;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,25 +42,28 @@ public class FollowLikersForegroundService extends Service {
         new Thread(() -> {
             for (int i = 0; true; i++) {
 
-                String shortcode = "";
+                String shortcode = "CM2U-PvrTeY";
                 UsersofLikedService usersofLikedService = new UsersofLikedService();
-                try {
-                    shortcode = usersofLikedService.lastpostShortcode(fullname -> {
-
-                        builder.setContentTitle(fullname + " followers")
-                                .setContentText(fullname + " selected");
-                        startForeground(3, builder.build());
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    shortcode = usersofLikedService.lastpostShortcode(fullname -> {
+//
+//                        builder.setContentTitle(fullname + " followers")
+//                                .setContentText(fullname + " selected");
+//                        startForeground(3, builder.build());
+//                    });
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
                 if (shortcode.equals(""))
                     continue;
 
                 try {
                     ContinuedEdges firstsfollowers = usersofLikedService.findfirstlikmers(shortcode);
+
+                    System.out.println(new Gson().toJson(firstsfollowers));
+
                     String finalShortcode = shortcode;
                     usersofLikedService.startfollowFollowers(firstsfollowers.postedges, new ResponseAction() {
                         @Override
@@ -93,7 +97,7 @@ public class FollowLikersForegroundService extends Service {
                 }
 
 
-                long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 15 * 1000);
+                long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 41 * 1000);
                 try {
                     String resp = Reqs.getReq("https://www.instagram.com/" + BusinessContext.Username + "/?__a=1");
                     JSONObject jsonObject = new JSONObject(resp);
