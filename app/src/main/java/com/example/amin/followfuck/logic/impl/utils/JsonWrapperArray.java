@@ -1,5 +1,7 @@
 package com.example.amin.followfuck.logic.impl.utils;
 
+import android.os.Build;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -100,32 +102,33 @@ public class JsonWrapperArray {
     }
 
     public void forEach(Handler<JsonWrapper> objectHandler) {
-        array.forEach((object) -> {
-            if (!(object instanceof JSONObject)) {
-                throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR, "[Json] Parse array error in forEach");
+            for (Object object : array) {
+                if (!(object instanceof JSONObject)) {
+                    throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR, "[Json] Parse array error in forEach");
+                }
+                objectHandler.handle(new JsonWrapper((JSONObject) object));
             }
-            objectHandler.handle(new JsonWrapper((JSONObject) object));
-        });
+
     }
 
     public void forEachAsArray(Handler<JsonWrapperArray> objectHandler) {
-        array.forEach((object) -> {
+        for (Object object : array) {
             if (!(object instanceof JSONArray)) {
                 throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
                         "[Json] Parse array error in forEachAsArray");
             }
             objectHandler.handle(new JsonWrapperArray((JSONArray) object));
-        });
+        }
     }
 
     public void forEachAsString(Handler<String> objectHandler) {
-        array.forEach((object) -> {
+        for (Object object : array) {
             if (!(object instanceof String)) {
                 throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
                         "[Json] Parse array error in forEachAsString");
             }
             objectHandler.handle((String) object);
-        });
+        }
     }
 
     public List<String> convert2StringList() {

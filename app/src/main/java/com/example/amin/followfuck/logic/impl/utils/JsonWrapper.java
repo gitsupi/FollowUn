@@ -211,11 +211,11 @@ public class JsonWrapper {
     public List<Map<String, String>> convert2DictList() {
         List<Map<String, String>> result = new LinkedList<>();
         Set<String> keys = this.json.keySet();
-        keys.forEach((key) -> {
+        for (String key : keys) {
             Map<String, String> temp = new LinkedHashMap<>();
             temp.put(key, this.getString(key));
             result.add(temp);
-        });
+        }
         return result;
     }
 

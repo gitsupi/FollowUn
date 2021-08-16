@@ -16,6 +16,7 @@ import java.util.List;
 
 public class FutureSymbolsCheckService extends Service {
     public static final String CHANNEL_ID = "ForegroundServiceChannel";
+    public static final String CHANNEL_ID2 = "dd";
 
 
     @Override
@@ -36,23 +37,46 @@ public class FutureSymbolsCheckService extends Service {
                 .setOnlyAlertOnce(true)
 //                .setContentIntent(pendingIntent)
                 ;
+        NotificationCompat.Builder builder2 = new NotificationCompat.Builder(this,
+                CHANNEL_ID2)
+                .setContentTitle("Game Started")
+                .setContentText(input)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setOnlyAlertOnce(true)
+//                .setContentIntent(pendingIntent)
+                ;
 
         new Thread(() -> {
+
+
+            int k = 232323333;
             for (; ; ) {
+                builder2.setContentText("COMMING? WHAT");
+                startForeground(4, builder2.build());
+
                 builder.setContentText(" is requesting...");
                 startForeground(3, builder.build());
 
 
-                SyncRequestClient syncRequestClient = SyncRequestClient.create(PrivateConfig.API_KEY, PrivateConfig.SECRET_KEY);
+
+                SyncRequestClient syncRequestClient = SyncRequestClient
+                        .create(PrivateConfig.API_KEY, PrivateConfig.SECRET_KEY);
 
                 try {
 
                     ExchangeInformation exchangeInformation = syncRequestClient.getExchangeInformation();
                     List<ExchangeInfoEntry> symbols = exchangeInformation.getSymbols();
 
-                    builder.setContentText(symbols.get(symbols.size() - 1).getSymbol());
-                    startForeground(3, builder.build());
+                    builder.setContentText("Always "+symbols.get(symbols.size() - 1).getSymbol());
+                    startForeground(5, builder.build());
+                    if (k < symbols.size()) {
 
+
+                        builder2.setContentText(symbols.get(symbols.size() - 1).getSymbol());
+                        startForeground(4, builder2.build());
+
+                    }
+                    k = symbols.size();
                 }
                 catch (Exception e){
 
@@ -61,16 +85,14 @@ public class FutureSymbolsCheckService extends Service {
                     startForeground(3, builder.build());
 
                 }
-
-                int k = 0;
-                int millis = 10000;
+                int millis =2*60*1000;
 
                 try {
+
                     Thread.sleep(millis);
-                    builder.setContentText(millis * k / 600000 + "m time of wait.passed..");
+                    builder.setContentText(millis * k / 60000 + "m time of wait.passed..");
                     startForeground(3, builder.build());
 
-                    k++;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
