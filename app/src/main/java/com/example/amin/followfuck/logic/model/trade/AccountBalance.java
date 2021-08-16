@@ -1,0 +1,46 @@
+package com.example.amin.followfuck.logic.model.trade;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.math.BigDecimal;
+
+import com.example.amin.followfuck.logic.constant.BinanceApiConstants;
+
+public class AccountBalance {
+
+    private String asset;
+
+    private BigDecimal balance;
+
+    private BigDecimal withdrawAvailable;
+
+    public String getAsset() {
+        return asset;
+    }
+
+    public void setAsset(String asset) {
+        this.asset = asset;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    public BigDecimal getWithdrawAvailable() {
+        return withdrawAvailable;
+    }
+
+    public void setWithdrawAvailable(BigDecimal withdrawAvailable) {
+        this.withdrawAvailable = withdrawAvailable;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("asset", asset)
+                .append("balance", balance).append("withdrawAvailable", withdrawAvailable).toString();
+    }
+}

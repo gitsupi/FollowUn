@@ -16,33 +16,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity
-            android:name=".LoginActivity"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
 
-        <service android:name=".HelloService" />
-        <service
-            android:name=".instgramapi.FollowForegroundService"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".instgramapi.UnFollowForegroundService"
-            android:enabled="true"
-            android:exported="true" />
-        <service android:name=".instgramapi.services.likerofpost.FollowLikersForegroundService" />
 
-        <activity
-            android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme"></activity>
+        <service
+            android:name=".logic.FutureSymbolsCheckService"
+            android:enabled="true"
+            android:exported="true" />
+
 
 
         <activity android:name=".WelcomeActivity" />

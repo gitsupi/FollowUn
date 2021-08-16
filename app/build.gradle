@@ -9,6 +9,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
+
     }
     buildTypes {
         release {
@@ -43,4 +45,18 @@ dependencies {
     implementation 'com.github.instagram4j:instagram4j:2.0.1'
     implementation 'org.jsoup:jsoup:1.13.1'
 //    compileOnly "org.projectlombok:lombok:1.18.16"
+
+//    implementation "com.squareup.okhttp3:okhttp:3.12.1"
+    implementation "com.alibaba:fastjson:1.2.47"
+    implementation "ch.qos.logback:logback-classic:1.2.3"
+    implementation "org.apache.commons:commons-lang3:3.6"
+    implementation "commons-codec:commons-codec:1.10"
+    implementation "commons-lang:commons-lang:2.6"
+
+
+    implementation("com.android.support:multidex:1.0.3")
+
+
+
+
 }

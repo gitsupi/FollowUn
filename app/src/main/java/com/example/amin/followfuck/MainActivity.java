@@ -5,31 +5,19 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.amin.followfuck.instgramapi.FollowForegroundService;
-import com.example.amin.followfuck.instgramapi.UnFollowForegroundService;
-import com.example.amin.followfuck.instgramapi.services.likerofpost.FollowLikersForegroundService;
+import com.example.amin.followfuck.logic.FutureSymbolsCheckService;
 
 public class MainActivity extends AppCompatActivity {
 
 
-    public void startunfoloowService() {
-        Intent serviceIntent = new Intent(this, UnFollowForegroundService.class);
-        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
-        ContextCompat.startForegroundService(this, serviceIntent);
-    }
-
     public void startService() {
 
-        Intent serviceIntent = new Intent(this, FollowForegroundService.class);
-        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
+        Intent serviceIntent = new Intent(this, FutureSymbolsCheckService.class);
+        serviceIntent.putExtra("inputExtra", "FutureSymbolsCheckService");
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 
-    public void startLikersService() {
 
-        Intent serviceIntent = new Intent(this, FollowLikersForegroundService.class);
-        ContextCompat.startForegroundService(this, serviceIntent);
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        new Thread(BusinessContext::initsetup).start();
-//        startLikersService();
-        startunfoloowService();
         startService();
 
 
